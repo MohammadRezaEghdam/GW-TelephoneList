@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrap.bundle.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- ! navigationbar -->
+    <div class="container-fluid mb-4">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#"><i class="fa fa-phone" aria-hidden="true"></i></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                    Dropdown
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled">Disabled</a>
+                </li>
+              </ul>
+              <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+              </form>
+            </div>
+          </nav>
+    </div>
+    <hr>
+    <!-- ! breadcrumb -->
+    <div class="container-fluid">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="list.html">list</a></li>
+            </ol>
+        </nav>
+    </div>
+    <!-- ! buttons -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6"><a href="index.html" class="btn btn-danger"><i class="fa fa-backward" aria-hidden="true"></i> Back</a>
+                <a href="addTelephone.html" class="btn btn-success ml-3">Add Telephone <i class="fa fa-plus" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- !fromgroup -->
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-3 mt-4">
+                <ul class="list-group">
+                    <li class="list-group-item active">Content group <i class="fa fa-user" aria-hidden="true"></i></li>
+                    <li class="list-group-item"><a href="Contents/PublicContentGroup.html">Public group</a></li>
+                    <li class="list-group-item"><a href="Contents/PrivateContentGroup.html">Private group</a></li>
+                    <li class="list-group-item"><a href="Contents/Family.html">Family</a></li>
+                    <li class="list-group-item"><a href="Contents/etc.html">etc</a></li>
+                </ul>
+            </div>
+            <div class="col-md-8">
+
+                <table class="table mt-4">
+                    <thead class="table-primary">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">First</th>
+                            <th scope="col">Last</th>
+                            <th scope="col">Handle</th>
+                            <th scope="col">edit</th>
+                            <th scope="col">delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td> <a href="edit.html" class="btn btn-info">edit <i class="fas fa-edit    "></i></a> </td>
+                            <td> <a href="" class="btn btn-danger">delete <i class="fa fa-trash" aria-hidden="true"></i></a> </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                            <td> <a href="edit.html" class="btn btn-info">edit <i class="fas fa-edit    "></i></a> </td>
+                            <td> <a href="" class="btn btn-danger">delete <i class="fa fa-trash" aria-hidden="true"></i></a> </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Larry</td>
+                            <td>the Bird</td>
+                            <td>@twitter</td>
+                            <td> <a href="edit.html" class="btn btn-info">edit <i class="fas fa-edit    "></i></a> </td>
+                            <td> <a href="" class="btn btn-danger">delete <i class="fa fa-trash" aria-hidden="true"></i></a> </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+
+</html>
