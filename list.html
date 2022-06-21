@@ -92,7 +92,7 @@
       </div>
       <div class="col-md-10">
 
-        <table class="table mt-4 text-center table-striped" >
+        <table class="table mt-4 text-center table-striped">
           <thead class="table-primary bg-primary">
             <tr>
               <th scope="col">#</th>
@@ -109,9 +109,21 @@
 
           </tbody>
         </table>
+        <!-- ! pagination  -->
+        <div class="text-center">
+          <nav aria-label="...">
+            <ul class="pagination pagination-sm">
+              <li class="page-item">
+                <p class="page-link" href="" id="firstPage">1</p>
+              </li>
+              <li class="page-item">
+                <p class="page-link" href="" id="secondPage">2</p>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
     </div>
-
     <!-- ! Module Here -->
     <div class="modal fade" id="DeleteModule" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
@@ -133,47 +145,62 @@
         </div>
       </div>
     </div>
-
   </div>
   <script>
     $('#DeleteModule').on('shown.bs.modal', function () {
       $('#DeleteModule').trigger('focus')
     })
 
-    // ! Just for practic
+
     $(document).ready(function () {
-      const xhr = new XMLHttpRequest();
+      $(window).on('load', function(){
+                runner(1)
+            });
+      // ! Let's try clean code here
+      var page;
 
-      xhr.open("GET", "https://randomuser.me/api?page=1&results=10&seed=erfan", true);
+      $("#firstPage").click(function () {
+        page = 1;
+        runner(page);
+      });
+      $("#secondPage").click(function () {
+        page = 2;
+        runner(page);
+      });
 
-      xhr.onload = function () {
-        if (this.status === 200) {
-          obj = JSON.parse(this.responseText);
 
-          let tableList = document.getElementById("list");
-          
-          str = ""
-          for (const key in obj.results) {
-            var id = key;
-            str += `<tr>
-              <th scope="row">${++id}</th>
-              <td>${obj.results[key].gender}</td>
-              <td>${obj.results[key].name['title'] + " " +  obj.results[key].name['first'] + "" + obj.results[key].name['last']}</td>
-              <td>${obj.results[key].email}</td>
-              <td>${obj.results[key].phone}</td>
-              <td><img src="${obj.results[key].picture['thumbnail']}" alt="" srcset="" height="30px" width="30px"></td>
-              <td> <a href="edit.html" class="btn btn-info">edit <i class="fas fa-edit    "></i></a> </td>
-              <td> <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DeleteModule">
-                  Delete <i class="fa fa-trash" aria-hidden="true"></i>
-                </button> </td>
-            </tr>`;
-            tableList.innerHTML  = str;
+      var runner = function (page) {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://randomuser.me/api?page=" + page + "&results=10&seed=erfan", true);
+        xhr.onload = function () {
+          if (this.status === 200) {
+            obj = JSON.parse(this.responseText);
+
+            let tableList = document.getElementById("list");
+
+            str = ""
+            for (const key in obj.results) {
+              var id = key;
+              str += `<tr>
+                <th scope="row">${++id}</th>
+                <td>${obj.results[key].gender}</td>
+                <td>${obj.results[key].name['title'] + " " + obj.results[key].name['first'] + "" + obj.results[key].name['last']}</td>
+                <td>${obj.results[key].email}</td>
+                <td>${obj.results[key].phone}</td>
+                <td><img src="${obj.results[key].picture['thumbnail']}" alt="" srcset="" height="30px" width="30px"></td>
+                <td> <a href="edit.html" class="btn btn-info">edit <i class="fas fa-edit    "></i></a> </td>
+                <td> <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DeleteModule">
+                    Delete <i class="fa fa-trash" aria-hidden="true"></i>
+                  </button> </td>
+              </tr>`;
+              tableList.innerHTML = str;
+            }
+          } else {
+            console.log("API failed!")
           }
-        }else{
-          console.log("API failed!")
         }
+        xhr.send();
       }
-      xhr.send();
     });
   </script>
   <script src="js/bootstrap.js"></script>
