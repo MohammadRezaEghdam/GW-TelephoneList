@@ -49,8 +49,8 @@
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search"
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search" value="">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="searchBtn"><i class="fa fa-search"
               aria-hidden="true"></i></button>
         </form>
       </div>
@@ -153,10 +153,10 @@
 
 
     $(document).ready(function () {
-      $(window).on('load', function(){
-                runner(1)
-            });
-      // ! Let's try clean code here
+      $(window).on('load', function () {
+        runner(1)
+      });
+      // ! Pagginatio here
       var page;
 
       $("#firstPage").click(function () {
@@ -170,6 +170,7 @@
 
 
       var runner = function (page) {
+
         const xhr = new XMLHttpRequest();
         xhr.open("GET", "https://randomuser.me/api?page=" + page + "&results=10&seed=erfan", true);
         xhr.onload = function () {
@@ -201,6 +202,37 @@
         }
         xhr.send();
       }
+
+
+      // search here
+      $("#search").on("keyup", function(){
+        var value = $(this).val().toLowerCase();
+        
+          $("#list tr").filter(function(){
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+        
+      });
+
+
+      // $("#search").on("keyup", function(e){
+      //   var key = $("#search").keydown(function(e){
+
+      //     String.fromCharCode(e.which);
+      //   });
+      //   console.log(key);
+      //   // if (key === ".") {
+      //   //   $("#search").val() = "";
+      //   // }
+      //   var value = $(this).val().toLowerCase();
+        
+      //     $("#list tr").filter(function(){
+      //     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      //   });
+        
+      // });
+
+
     });
   </script>
   <script src="js/bootstrap.js"></script>
