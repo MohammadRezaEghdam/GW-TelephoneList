@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -92,7 +92,7 @@
       </div>
       <div class="col-md-10">
 
-        <table class="table mt-4 text-center table-striped">
+        <table class="table mt-4 text-center table-striped" >
           <thead class="table-primary bg-primary">
             <tr>
               <th scope="col">#</th>
@@ -105,79 +105,7 @@
               <th scope="col">Delete</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Male</td>
-              <td>Mr. Alireza Ghelman</td>
-              <td>Gelman.alireza@gmail.com</td>
-              <td>0917********</td>
-              <td><img src="images/Sample_User_Icon.png" alt="" srcset="" height="30px" width="30px"></td>
-              <td> <a href="edit.html" class="btn btn-info">edit <i class="fas fa-edit    "></i></a> </td>
-              <td> <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DeleteModule">
-                  Delete <i class="fa fa-trash" aria-hidden="true"></i>
-                </button> </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Female</td>
-              <td>Mrs. Sanaz Behbod</td>
-              <td>SanazBehbod@gmail.com</td>
-              <td>0917********</td>
-              <td><img src="images/Sample_User_Icon.png" alt="" srcset="" height="30px" width="30px"></td>
-              <td> <a href="edit.html" class="btn btn-info">edit <i class="fas fa-edit    "></i></a> </td>
-              <td> <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DeleteModule">
-                  Delete <i class="fa fa-trash" aria-hidden="true"></i>
-                </button> </td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Male</td>
-              <td>Mr. Mohammad Tavakoli</td>
-              <td>Tavakoli1680@gmail.com</td>
-              <td>0917********</td>
-              <td><img src="images/Sample_User_Icon.png" alt="" srcset="" height="30px" width="30px"></td>
-              <td> <a href="edit.html" class="btn btn-info">edit <i class="fas fa-edit    "></i></a> </td>
-              <td> <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DeleteModule">
-                  Delete <i class="fa fa-trash" aria-hidden="true"></i>
-                </button> </td>
-            </tr>
-            <tr>
-              <th scope="row">4</th>
-              <td>Male</td>
-              <td>Mr. Soroush Erjai</td>
-              <td>soroush1372@gmail.com</td>
-              <td>0917********</td>
-              <td><img src="images/Sample_User_Icon.png" alt="" srcset="" height="30px" width="30px"></td>
-              <td> <a href="edit.html" class="btn btn-info">edit <i class="fas fa-edit    "></i></a> </td>
-              <td> <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DeleteModule">
-                  Delete <i class="fa fa-trash" aria-hidden="true"></i>
-                </button> </td>
-            </tr>
-            <tr>
-              <th scope="row">5</th>
-              <td>Female</td>
-              <td>Ms. Pegah Davar</td>
-              <td>Davar-Pegah@gmail.com</td>
-              <td>0917********</td>
-              <td><img src="images/Sample_User_Icon.png" alt="" srcset="" height="30px" width="30px"></td>
-              <td> <a href="edit.html" class="btn btn-info">edit <i class="fas fa-edit    "></i></a> </td>
-              <td> <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DeleteModule">
-                  Delete <i class="fa fa-trash" aria-hidden="true"></i>
-                </button> </td>
-            </tr>
-            <tr>
-              <th scope="row">6</th>
-              <td>Male</td>
-              <td>Mr. Ali Reza frorozan</td>
-              <td>Frozan8080@gmail.com</td>
-              <td>0917********</td>
-              <td><img src="images/Sample_User_Icon.png" alt="" srcset="" height="30px" width="30px"></td>
-              <td> <a href="edit.html" class="btn btn-info">edit <i class="fas fa-edit    "></i></a> </td>
-              <td> <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DeleteModule">
-                  Delete <i class="fa fa-trash" aria-hidden="true"></i>
-                </button> </td>
-            </tr>
+          <tbody id="list">
 
           </tbody>
         </table>
@@ -211,6 +139,42 @@
     $('#DeleteModule').on('shown.bs.modal', function () {
       $('#DeleteModule').trigger('focus')
     })
+
+    // ! Just for practic
+    $(document).ready(function () {
+      const xhr = new XMLHttpRequest();
+
+      xhr.open("GET", "https://randomuser.me/api?page=1&results=10&seed=erfan", true);
+
+      xhr.onload = function () {
+        if (this.status === 200) {
+          obj = JSON.parse(this.responseText);
+
+          let tableList = document.getElementById("list");
+          
+          str = ""
+          for (const key in obj.results) {
+            var id = key;
+            str += `<tr>
+              <th scope="row">${++id}</th>
+              <td>${obj.results[key].gender}</td>
+              <td>${obj.results[key].name['title'] + " " +  obj.results[key].name['first'] + "" + obj.results[key].name['last']}</td>
+              <td>${obj.results[key].email}</td>
+              <td>${obj.results[key].phone}</td>
+              <td><img src="${obj.results[key].picture['thumbnail']}" alt="" srcset="" height="30px" width="30px"></td>
+              <td> <a href="edit.html" class="btn btn-info">edit <i class="fas fa-edit    "></i></a> </td>
+              <td> <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DeleteModule">
+                  Delete <i class="fa fa-trash" aria-hidden="true"></i>
+                </button> </td>
+            </tr>`;
+            tableList.innerHTML  = str;
+          }
+        }else{
+          console.log("API failed!")
+        }
+      }
+      xhr.send();
+    });
   </script>
   <script src="js/bootstrap.js"></script>
   <script src="js/bootstrap.bundle.js"></script>
