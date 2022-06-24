@@ -49,7 +49,8 @@
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search" value="">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search"
+            value="">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="searchBtn"><i class="fa fa-search"
               aria-hidden="true"></i></button>
         </form>
@@ -205,32 +206,30 @@
 
 
       // search here
-      $("#search").on("keyup", function(){
-        var value = $(this).val().toLowerCase();
-        
-          $("#list tr").filter(function(){
-          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
-        
-      });
-
-
-      // $("#search").on("keyup", function(e){
-      //   var key = $("#search").keydown(function(e){
-
-      //     String.fromCharCode(e.which);
-      //   });
-      //   console.log(key);
-      //   // if (key === ".") {
-      //   //   $("#search").val() = "";
-      //   // }
+      // $("#search").on("keyup", function(){
       //   var value = $(this).val().toLowerCase();
-        
+
       //     $("#list tr").filter(function(){
       //     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
       //   });
-        
+
       // });
+
+
+      $("#search").on("keyup", function (e) {
+          if (e.which === 46) {
+            $(this).val('');
+            $("#list tr").show();
+          } else {
+            var value = $(this).val().toLowerCase();
+
+            $("#list tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+              });
+            }
+
+      });
+
 
 
     });
