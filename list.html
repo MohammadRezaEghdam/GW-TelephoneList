@@ -75,6 +75,7 @@
             aria-hidden="true"></i> Back</a>
         <a href="addTelephone.html" class="btn btn-success ml-3">Add Telephone <i class="fa fa-plus"
             aria-hidden="true"></i></a>
+        <a href="#" class="btn btn-info" id="printTable">Print Contacts <i class="fa fa-print" aria-hidden="true"></i></a>
       </div>
     </div>
   </div>
@@ -205,15 +206,15 @@
       }
 
 
-      // search here
-      // $("#search").on("keyup", function(){
-      //   var value = $(this).val().toLowerCase();
-
-      //     $("#list tr").filter(function(){
-      //     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-      //   });
-
-      // });
+      // print table here
+      $("#printTable").on("click", function(e){
+            const win = window.open();
+            const content = $('#list')[0].outerHTML;
+            win.document.write(content);
+            win.document.close();      
+            win.print();
+        e.preventDefault();
+      });
 
 
       $("#search").on("keyup", function (e) {
