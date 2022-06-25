@@ -73,9 +73,10 @@
     <div class="row">
       <div class="col-md-6"><a href="index.html" class="btn btn-danger"><i class="fa fa-backward"
             aria-hidden="true"></i> Back</a>
-        <a href="addTelephone.html" class="btn btn-success ml-3">Add Telephone <i class="fa fa-plus"
+        <a href="addTelephone.html" class="btn btn-success ml-3" id="addTelephone">Add Telephone <i class="fa fa-plus"
             aria-hidden="true"></i></a>
-        <a href="#" class="btn btn-info" id="printTable">Print Contacts <i class="fa fa-print" aria-hidden="true"></i></a>
+        <a href="#" class="btn btn-info" id="printTable">Print Contacts <i class="fa fa-print"
+            aria-hidden="true"></i></a>
       </div>
     </div>
   </div>
@@ -127,7 +128,7 @@
       </div>
     </div>
     <!-- ! Module Here -->
-    <div class="modal fade" id="DeleteModule" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <!-- <div class="modal fade" id="DeleteModule" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -146,12 +147,12 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
   <script>
-    $('#DeleteModule').on('shown.bs.modal', function () {
-      $('#DeleteModule').trigger('focus')
-    })
+    // $('#DeleteModule').on('shown.bs.modal', function () {
+    //   $('#DeleteModule').trigger('focus')
+    // })
 
 
     $(document).ready(function () {
@@ -185,16 +186,15 @@
             for (const key in obj.results) {
               var id = key;
               str += `<tr>
-                <th scope="row">${++id}</th>
+                <th scope="row" id="id">${++id}</th>
                 <td>${obj.results[key].gender}</td>
                 <td>${obj.results[key].name['title'] + " " + obj.results[key].name['first'] + "" + obj.results[key].name['last']}</td>
                 <td>${obj.results[key].email}</td>
                 <td>${obj.results[key].phone}</td>
                 <td><img src="${obj.results[key].picture['thumbnail']}" alt="" srcset="" height="30px" width="30px"></td>
                 <td> <a href="edit.html" class="btn btn-info">edit <i class="fas fa-edit    "></i></a> </td>
-                <td> <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DeleteModule">
-                    Delete <i class="fa fa-trash" aria-hidden="true"></i>
-                  </button> </td>
+                <td> <a href="#" class="btn btn-danger" id="DeleteUser">Delete <i class="fa fa-trash"
+            aria-hidden="true"></i></a> </td>
               </tr>`;
               tableList.innerHTML = str;
             }
@@ -207,30 +207,44 @@
 
 
       // print table here
-      $("#printTable").on("click", function(e){
-            const win = window.open();
-            const content = $('#list')[0].outerHTML;
-            win.document.write(content);
-            win.document.close();      
-            win.print();
+      $("#printTable").on("click", function (e) {
+        const win = window.open();
+        const content = $('#list')[0].outerHTML;
+        win.document.write(content);
+        win.document.close();
+        win.print();
         e.preventDefault();
       });
 
 
       $("#search").on("keyup", function (e) {
-          if (e.which === 46) {
-            $(this).val('');
-            $("#list tr").show();
-          } else {
-            var value = $(this).val().toLowerCase();
+        if (e.which === 46) {
+          $(this).val('');
+          $("#list tr").show();
+        } else {
+          var value = $(this).val().toLowerCase();
 
-            $("#list tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-              });
-            }
+          $("#list tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+          });
+        }
 
       });
 
+      $("#DeleteUser").on("click", function (e) {
+        e.preventDefault();
+        alert("some")
+
+        // let row = $(this).closest('tr');
+        // let id = row.find('#id').text();
+        // $.ajax({
+        //   url: 'https://webhook.site/5a540f85-49b5-4aa9-8ec8-811b85601c0f?id=10',
+        //   type: 'DELETE',
+        //   success: function (result) {
+        //     console.log(result);
+        //   }
+        // });
+      });
 
 
     });
