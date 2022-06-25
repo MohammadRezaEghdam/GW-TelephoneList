@@ -127,6 +127,18 @@
         </div>
       </div>
     </div>
+
+    <!-- ! btns here -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-3 block">
+        </div>
+        <div class="col-md-3">
+          <button id="deleteUserBtn" class="btn btn-danger">delete <i class="fas fa-edit" onclick="deleteUser()"></i></button>
+        </div>
+      </div>
+    </div>
     <!-- ! Module Here -->
     <!-- <div class="modal fade" id="DeleteModule" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
@@ -192,9 +204,8 @@
                 <td>${obj.results[key].email}</td>
                 <td>${obj.results[key].phone}</td>
                 <td><img src="${obj.results[key].picture['thumbnail']}" alt="" srcset="" height="30px" width="30px"></td>
-                <td> <a href="edit.html" class="btn btn-info">edit <i class="fas fa-edit    "></i></a> </td>
-                <td> <a href="#" class="btn btn-danger" id="DeleteUser">Delete <i class="fa fa-trash"
-            aria-hidden="true"></i></a> </td>
+                <td> <a href="edit.html" class="btn btn-info">Update <i class="fas fa-edit    "></i></a> </td>
+                <td> <a id="deleteUserBtn" class="btn btn-danger">delete <i class="fas fa-trash"></i></a> </td>
               </tr>`;
               tableList.innerHTML = str;
             }
@@ -231,21 +242,17 @@
 
       });
 
-      $("#DeleteUser").on("click", function (e) {
-        e.preventDefault();
-        alert("some")
 
-        // let row = $(this).closest('tr');
-        // let id = row.find('#id').text();
-        // $.ajax({
-        //   url: 'https://webhook.site/5a540f85-49b5-4aa9-8ec8-811b85601c0f?id=10',
-        //   type: 'DELETE',
-        //   success: function (result) {
-        //     console.log(result);
-        //   }
-        // });
+      $("#deleteUserBtn").click(function(){
+        console.log("Delete...")
+        $.ajax({
+          url: "http://webhook.site/5a540f85-49b5-4aa9-8ec8-811b85601c0f?id=10",
+          method: 'delete',
+          success: function (response) {
+            console.log("Deleted!")
+          }
+        })
       });
-
 
     });
   </script>
