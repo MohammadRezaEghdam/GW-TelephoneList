@@ -103,7 +103,7 @@ if ($result->num_rows > 0) {
                                     <?= $row['contact_phone'] ?>
                                 </td>
                                 <td>
-                                    <a href="./edit.php?id=<?= $row['id'] ?>" class="btn btn-info">Edit</a>
+                                    <a href="./editContact.php?id=<?= $row['id'] ?>" class="btn btn-info">Edit</a>
                                     <a href="./dashbord.php?method=delete&id=<?= $row['id'] ?>" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
