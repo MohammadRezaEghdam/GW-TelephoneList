@@ -104,5 +104,6 @@ include "./Front/navigationbar.php";
     </div> -->
 </div>
 <?php
+include "./Front/scripts.php";
 include "./Front/footer.php";
 ?>
