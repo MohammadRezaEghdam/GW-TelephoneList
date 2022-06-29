@@ -23,6 +23,7 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="addTelephone.php">Add new telephone</a>
               <a class="dropdown-item" href="list.php">Contact list</a>
+              <a class="dropdown-item" href="./myContacts.php">MyContact</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#">Something else here</a>
             </div>
