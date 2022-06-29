@@ -22,14 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (!$conn) {
                 die("Connection failed: " . mysqli_connect_error());
             }
-            echo "Connected successfully";
 
             $sql = "INSERT INTO users (fullname, email, password) VALUES ('{$fullname}', '{$email}', '{$userPassword}')";
 
-            if (mysqli_query($conn, $sql)) {
-                echo "New record created successfully";
-            } else {
+            if (!mysqli_query($conn, $sql)) {
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            }else{
+                header("Location: ../index.php");
             }
         }
     }
