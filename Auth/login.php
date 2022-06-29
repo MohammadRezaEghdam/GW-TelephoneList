@@ -28,8 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 // output data of each row
                 while ($row = mysqli_fetch_assoc($result)) {
                     if ($row['fullname'] == $fullname && $row['password'] == $userPassword) {
-                        
-                        header("Location: ../index.php");
+                        $_SESSION['fullname'] = $fullname;
+                        header("Location: ../dashbord.php");
                     }
                 }
             } else {
