@@ -28,7 +28,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
+            <a class="nav-link " href="./Auth/logout.php">Logout</a>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
