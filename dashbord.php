@@ -61,7 +61,7 @@ if ($result->num_rows > 0) {
                 <img src="https://i.pravatar.cc/300" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">User fullname :<?= $_SESSION['fullname'] ?></h5>
-                    <p class="card-text">User id :<?= $_SESSION['userId'] ?? "" ?></p>
+                    <p class="card-text">User id :<span class="badge badge-pill badge-info"><?= $_SESSION['userId'] ?? "" ?></span></p>
                     <p class="card-text">User Email Address :<?= $_SESSION['email'] ?? "" ?></p>
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
