@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if (!empty($_POST['fullname']) && !empty('password')) {
 
             $fullname = $_POST['fullname'];
-            $userPassword = $_POST['password'];
+            $userPassword = md5($_POST['password']);
 
             $servername = "localhost";
             $username = "root";
