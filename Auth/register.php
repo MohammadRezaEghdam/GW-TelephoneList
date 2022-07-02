@@ -2,6 +2,22 @@
 include "../Front/header.php";
 include "../Front/navigationbar.php";
 
+
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbName = "telephonelist";
+
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $dbName);
+
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['fullname']) && isset($_POST['email'])  && isset($_POST['password'])) {
         if (!empty($_POST['fullname']) && !empty($_POST['email']) && !empty($_POST['password'])) {
@@ -9,28 +25,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $email = $_POST['email'];
             $userPassword = $_POST['password'];
 
+            $checkerQuery = mysqli_query($conn, "SELECT email FROM users WHERE email = '{$_POST['email']}'");
+            if (!mysqli_num_rows($checkerQuery) > 0) {
 
-            $servername = "localhost";
-            $username = "root";
-            $password = "";
-            $dbName = "telephonelist";
+                $sql = "INSERT INTO users (fullname, email, password) VALUES ('{$fullname}', '{$email}', '{$userPassword}')";
 
-            // Create connection
-            $conn = mysqli_connect($servername, $username, $password, $dbName);
-
-            // Check connection
-            if (!$conn) {
-                die("Connection failed: " . mysqli_connect_error());
-            }
-
-            $sql = "INSERT INTO users (fullname, email, password) VALUES ('{$fullname}', '{$email}', '{$userPassword}')";
-
-            if (!mysqli_query($conn, $sql)) {
-                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-            }else{
-                 $_SESSION["fullname"] = $fullname;
-                 $_SESSION["email"] = $email;
-                header("Location: ../dashbord.php");
+                if (!mysqli_query($conn, $sql)) {
+                    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                } else {
+                    $_SESSION["fullname"] = $fullname;
+                    $_SESSION["email"] = $email;
+                    header("Location: ../dashbord.php");
+                }
+            } else {
+                die("<div class=\"alert alert-danger\" role=\"alert\">
+                    This user alredy exists! <a href=\"./register.php\">Register</a>
+                </div>");
             }
         }
     }
