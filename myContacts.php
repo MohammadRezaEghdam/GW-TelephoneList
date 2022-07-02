@@ -12,16 +12,16 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
- // ! delete method here 
+// ! delete method here 
 if (isset($_GET['method']) == "delete") {
 
     $contactId = $_GET['id'];
     $sql = "DELETE FROM contacts WHERE id=$contactId";
 
-if (!$conn->query($sql) === TRUE) {
-    echo "Error deleting record: " . $conn->error;
-}
-header("Location: ./myContacts.php");
+    if (!$conn->query($sql) === TRUE) {
+        echo "Error deleting record: " . $conn->error;
+    }
+    header("Location: ./myContacts.php");
 }
 ?>
 
@@ -53,7 +53,7 @@ header("Location: ./myContacts.php");
         </div>
         <div class="col-md-8">
 
-            <table class="table mt-4 text-center table-striped">
+            <table class="table mt-4 text-center table-striped" id="list" >
                 <thead class="table-primary bg-primary">
                     <tr>
                         <th scope="col">#</th>
@@ -63,7 +63,7 @@ header("Location: ./myContacts.php");
 
                     </tr>
                 </thead>
-                <tbody id="list">
+                <tbody id="list" class="table table-striped table-bordered table-sm">
 
                     <?php
 
@@ -76,9 +76,9 @@ header("Location: ./myContacts.php");
                         $id = 0;
                         while ($row = mysqli_fetch_assoc($result)) {
                     ?>
-                            <tr>
+                            <tr >
                                 <td>
-                                    <?= ++$id?>
+                                    <?= ++$id ?>
                                 </td>
                                 <td>
                                     <?= $row['contact_name'] ?>
@@ -103,13 +103,17 @@ header("Location: ./myContacts.php");
 
                 </tbody>
             </table>
-            <!-- ! pagination  -->
             
+            <!-- ! pagination  -->
+
         </div>
     </div>
+    
 
     <!-- ! btns here -->
 
     <?php
+    include "./Front/search.php";
+    include "./Front/pagination.php";
     include "./Front/footer.php";
     ?>
