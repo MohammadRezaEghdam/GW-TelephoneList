@@ -57,6 +57,7 @@ if (isset($_GET['method']) == "delete") {
                 <thead class="table-primary bg-primary">
                     <tr>
                         <th scope="col">#</th>
+                        <th scope="col">Avatar</th>
                         <th scope="col">Fullname</th>
                         <th scope="col">Email</th>
                         <th scope="col">Action</th>
@@ -79,6 +80,9 @@ if (isset($_GET['method']) == "delete") {
                             <tr >
                                 <td>
                                     <?= ++$id ?>
+                                </td>
+                                <td>
+                                    <img src="<?= (is_null($row['avatar'])) ? "./images/Sample_User_Icon.png" : "{$row['avatar']}" ?>" alt="" srcset="" height="30" width="30">
                                 </td>
                                 <td>
                                     <?= $row['contact_name'] ?>
