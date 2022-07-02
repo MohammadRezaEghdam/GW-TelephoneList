@@ -82,7 +82,7 @@ if (isset($_GET['method']) == "delete") {
                                     <?= ++$id ?>
                                 </td>
                                 <td>
-                                    <img src="<?= (is_null($row['avatar'])) ? "./images/Sample_User_Icon.png" : "{$row['avatar']}" ?>" alt="" srcset="" height="30" width="30">
+                                    <img src="<?= (is_null($row['avatar'])) ? "./images/Sample_User_Icon.png" : "./images/{$row['avatar']}" ?>" alt="" srcset="" height="30" width="30">
                                 </td>
                                 <td>
                                     <?= $row['contact_name'] ?>

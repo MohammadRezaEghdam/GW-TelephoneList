@@ -1,34 +1,44 @@
 <?php
 include "./Front/header.php";
 include "./Front/navigationbar.php";
+// * sql connection here
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "telephonelist";
+
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+
+
+
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (isset($_POST['name']) && isset($_POST['phone'])) {
         if (!empty($_POST['name'] && !empty($_POST['phone']))) {
-             $userName = $_POST['name'];
-             $phone = $_POST['phone'];
-             $userId = $_SESSION['userId'];
+            $userName = $_POST['name'];
+            $phone = $_POST['phone'];
+            $userId = $_SESSION['userId'];
 
+            $filename = $_FILES["imageFile"]["name"] ;
+            
+            $tempname = $_FILES["imageFile"]["tmp_name"];
+            $target_dir =  __DIR__  . "/images/" . $filename;
+            if (move_uploaded_file($tempname, $target_dir)) {
 
-            $servername = "localhost";
-            $username = "root";
-            $password = "";
-            $dbname = "telephonelist";
+                $sql = "INSERT INTO contacts (user_id, contact_name, contact_phone, avatar) VALUES ('{$userId}', '{$userName}', '{$phone}', '{$filename}')";
 
-            // Create connection
-            $conn = mysqli_connect($servername, $username, $password, $dbname);
-            // Check connection
-            if (!$conn) {
-                die("Connection failed: " . mysqli_connect_error());
+                if (!mysqli_query($conn, $sql)) {
+                    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                }
+
+                // header("Location: ./myContacts.php");
             }
-
-            $sql = "INSERT INTO contacts (user_id, contact_name, contact_phone) VALUES ('{$userId}', '{$userName}', '{$phone}')";
-
-            if (!mysqli_query($conn, $sql)) {
-                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-            }
-
-            header("Location: ./myContacts.php");
         }
     }
 }
@@ -44,17 +54,26 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 </div>
 
 <div class="container mt-4">
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
         <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <label for="exampleInputEmail1">Contact Name</label>
+            <input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Contact Name">
         </div>
         <div class="form-group">
-            <label  for="exampleInputPassword1">Password</label>
-            <input name="phone" type="number" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <label for="exampleInputPassword1">thelephone Number</label>
+            <input name="phone" type="number" class="form-control" id="exampleInputPassword1" placeholder="Telephone number">
         </div>
-        
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <label for="inputGroupFileAddon01"> Choose file for upload:</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+            </div>
+            <div class="custom-file">
+                <input name="imageFile" type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
     </form>
 </div>
 
