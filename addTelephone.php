@@ -14,10 +14,6 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-
-
-
-
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (isset($_POST['name']) && isset($_POST['phone'])) {
         if (!empty($_POST['name'] && !empty($_POST['phone']))) {
@@ -25,19 +21,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $phone = $_POST['phone'];
             $userId = $_SESSION['userId'];
 
-            $filename = $_FILES["imageFile"]["name"] ;
-            
+            $filename = $_FILES["imageFile"]["name"];
             $tempname = $_FILES["imageFile"]["tmp_name"];
-            $target_dir =  __DIR__  . "/images/" . $filename;
+            $nameArr = explode('.', $filename);
+            $ext = $nameArr[count($nameArr) - 1];
+            $newName = date("Y-m-d"). "_" . $filename . '.' . $ext;
+            $target_dir =  __DIR__  . "/images/" . $newName;
             if (move_uploaded_file($tempname, $target_dir)) {
 
-                $sql = "INSERT INTO contacts (user_id, contact_name, contact_phone, avatar) VALUES ('{$userId}', '{$userName}', '{$phone}', '{$filename}')";
+                $sql = "INSERT INTO contacts (user_id, contact_name, contact_phone, avatar) VALUES ('{$userId}', '{$userName}', '{$phone}', '{$newName}')";
 
                 if (!mysqli_query($conn, $sql)) {
                     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
                 }
 
-                // header("Location: ./myContacts.php");
+                header("Location: ./myContacts.php");
             }
         }
     }

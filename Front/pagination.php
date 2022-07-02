@@ -1,7 +1,7 @@
 <script>
         $(document).ready(function() {
             $('#list').after('<div id="nav" class="text-center"></div>');
-            var rowsShown = 1;
+            var rowsShown = 2;
             var rowsTotal = $('#list tbody tr').length;
             var numPages = rowsTotal / rowsShown;
             for (i = 0; i < numPages; i++) {
