@@ -1,41 +1,36 @@
 <?php
 include "../Front/header.php";
 include "../Front/navigationbar.php";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "telephonelist";
+
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (isset($_POST['fullname']) && isset($_POST['password'])) {
         if (!empty($_POST['fullname']) && !empty('password')) {
 
             $fullname = $_POST['fullname'];
-            $userPassword = md5($_POST['password']);
+            $userPassword = $_POST['password'];
 
-            $servername = "localhost";
-            $username = "root";
-            $password = "";
-            $dbname = "telephonelist";
-
-            // Create connection
-            $conn = mysqli_connect($servername, $username, $password, $dbname);
-            // Check connection
-            if (!$conn) {
-                die("Connection failed: " . mysqli_connect_error());
-            }
-
-            $sql = "SELECT fullname, password FROM users";
+            $sql = "SELECT password FROM users WHERE fullname = '{$fullname}'";
             $result = mysqli_query($conn, $sql);
 
             if (mysqli_num_rows($result) > 0) {
-                // output data of each row
                 while ($row = mysqli_fetch_assoc($result)) {
-                    if ($row['fullname'] == $fullname && $row['password'] == $userPassword) {
+                    if (password_verify($userPassword, $row['password'])) {
                         $_SESSION['fullname'] = $fullname;
                         header("Location: ../dashbord.php");
                     }
                 }
-            } else {
-                echo "0 results";
             }
-
             mysqli_close($conn);
         }
     }

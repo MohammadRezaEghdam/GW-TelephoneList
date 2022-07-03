@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (!empty($_POST['fullname']) && !empty($_POST['email']) && !empty($_POST['password'])) {
             $fullname = $_POST['fullname'];
             $email = $_POST['email'];
-            $userPassword = md5($_POST['password']);
+            $userPassword =  password_hash($_POST['password'], PASSWORD_DEFAULT);
 
             $checkerQuery = mysqli_query($conn, "SELECT email FROM users WHERE email = '{$_POST['email']}'");
             if (!mysqli_num_rows($checkerQuery) > 0) {
